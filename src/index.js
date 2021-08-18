@@ -1,6 +1,7 @@
 import './style.css';
+import update from './complete.js';
 
-const list = [
+let list = [
   {
     description: 'Complete the to do list project',
     completed: false,
@@ -8,7 +9,7 @@ const list = [
   },
   {
     description: 'Learn how to set up webpack',
-    completed: false,
+    completed: true,
     index: 1,
   },
   {
@@ -18,10 +19,16 @@ const list = [
   },
   {
     description: 'check with Ali his process during this week',
-    completed: false,
+    completed: true,
     index: 3,
   },
 ];
+if (localStorage.getItem('list') == null) {
+  localStorage.setItem('list', JSON.stringify(list));
+}
+if (localStorage.getItem('list') != null) {
+  list = JSON.parse(localStorage.getItem('list'));
+}
 
 const iterateTasks = () => {
   list.forEach((task) => {
@@ -32,12 +39,14 @@ const iterateTasks = () => {
     document.querySelector('.todolist').appendChild(listContainer);
     checkbox.type = 'checkbox';
     checkbox.name = 'checkbox';
+    if (task.completed === true) {
+      checkbox.checked = true;
+    } else {
+      checkbox.checked = false;
+    }
     checkbox.addEventListener('change', (e) => {
-      if (e.target.checked) {
-        task.completed = true;
-      } else {
-        task.completed = false;
-      }
+      update(task, e);
+      localStorage.setItem('list', JSON.stringify(list));
     });
     listContainer.appendChild(checkbox);
     listContainer.appendChild(description);
@@ -58,8 +67,14 @@ const arrangeList = () => {
   }
 };
 
+const showList = () => {
+  list.forEach((task) => {
+    console.log(`the task: ${task.index} is ${task.completed}`);
+  });
+};
 const renderList = () => {
   arrangeList();
   iterateTasks();
 };
 renderList();
+showList();
