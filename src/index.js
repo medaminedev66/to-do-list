@@ -31,6 +31,14 @@ const iterateTasks = () => {
     const checkbox = document.createElement('input');
     document.querySelector('.todolist').appendChild(listContainer);
     checkbox.type = 'checkbox';
+    checkbox.name = 'checkbox';
+    checkbox.addEventListener('change', (e) => {
+      if (e.target.checked) {
+        task.completed = true;
+      } else {
+        task.completed = false;
+      }
+    });
     listContainer.appendChild(checkbox);
     listContainer.appendChild(description);
     description.innerText = task.description;
