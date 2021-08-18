@@ -12,6 +12,8 @@
 - In terminal or Command line. Navigate to a directory in your local storage where you'd like to store the project and paste ```https://github.com/medaminedev66/to-do-list.git```
 - Navigate to the ```index.html``` file and open it in your favourite browser.
 
+## Author
+
 👤 **Amine Smahi**
 
 - GitHub: [@medaminedev66](https://github.com/medaminedev66 )
