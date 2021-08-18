@@ -1,5 +1,5 @@
 import './style.css';
-import update from './complete.js';
+import update from './completed.js';
 
 let list = [
   {
@@ -36,7 +36,7 @@ const iterateTasks = () => {
     listContainer.className = 'listContainer';
     const description = document.createElement('p');
     const checkbox = document.createElement('input');
-    document.querySelector('.todolist').appendChild(listContainer);
+    document.querySelector('.the-list').appendChild(listContainer);
     checkbox.type = 'checkbox';
     checkbox.name = 'checkbox';
     if (task.completed === true) {
@@ -66,15 +66,8 @@ const arrangeList = () => {
     }
   }
 };
-
-const showList = () => {
-  list.forEach((task) => {
-    console.log(`the task: ${task.index} is ${task.completed}`);
-  });
-};
 const renderList = () => {
   arrangeList();
   iterateTasks();
 };
 renderList();
-showList();
