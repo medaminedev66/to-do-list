@@ -39,13 +39,13 @@ const createTask = (task) => {
   listContainer.appendChild(checkbox);
   listContainer.appendChild(description);
   listContainer.appendChild(removeIcon);
-  listContainer.addEventListener('mousemove', () => {
+  listContainer.addEventListener('mouseenter', () => {
     removeIcon.classList.remove('invisible');
   });
   listContainer.addEventListener('mouseleave', () => {
     setTimeout(() => {
       removeIcon.classList.add('invisible');
-    }, 500);
+    }, 100);
   });
   description.innerText = task.description;
 };
@@ -74,18 +74,25 @@ const renderList = () => {
   iterateTasks();
 };
 renderList();
+const renderTask = () => {
+  if (localStorage.getItem('list') == null) {
+    localStorage.setItem('list', JSON.stringify([]));
+  }
+  list = JSON.parse(localStorage.getItem('list'));
+  const inputText = document.querySelector('.input-text').value;
+  let index;
+  if (list.length > 0) index = list[list.length - 1].index + 1;
+  else index = 1;
+  const task = addTask(inputText, false, index);
+  createTask(task);
+  document.querySelector('.input-text').value = '';
+};
+
+document.querySelector('.fa-plus-square').addEventListener('click', () => {
+  renderTask();
+});
 document.querySelector('.input-text').addEventListener('keyup', (event) => {
   if (event.keyCode === 13) {
-    if (localStorage.getItem('list') == null) {
-      localStorage.setItem('list', JSON.stringify([]));
-    }
-    list = JSON.parse(localStorage.getItem('list'));
-    const inputText = document.querySelector('.input-text').value;
-    let index;
-    if (list.length > 0) index = list[list.length - 1].index + 1;
-    else index = 1;
-    const task = addTask(inputText, false, index);
-    createTask(task);
-    document.querySelector('.input-text').value = '';
+    renderTask();
   }
 });
