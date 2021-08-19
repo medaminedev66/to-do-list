@@ -14,10 +14,17 @@ const addTask = (description, completed, index) => {
   return task;
 };
 
-const removeTask = (id) => {
+const removeTask = (index) => {
   const oldList = JSON.parse(localStorage.getItem('list'));
-  oldList.splice(oldList.indexOf(id), 1);
-  localStorage.setItem('list', JSON.stringify(oldList));
+  const newList = oldList.filter((ind) => ind.index !== index);
+  if (newList.length > 0) {
+    let i = 1;
+    newList.forEach((element) => {
+      element.index = i;
+      i += 1;
+    });
+  }
+  localStorage.setItem('list', JSON.stringify(newList));
 };
 
 export { addTask, removeTask };

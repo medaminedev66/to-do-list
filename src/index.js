@@ -10,7 +10,7 @@ if (localStorage.getItem('list') != null) {
   list = JSON.parse(localStorage.getItem('list'));
 }
 
-const createTask = (task, id) => {
+const createTask = (task) => {
   const listContainer = document.createElement('div');
   listContainer.className = 'listContainer';
   const description = document.createElement('p');
@@ -22,7 +22,7 @@ const createTask = (task, id) => {
   checkbox.type = 'checkbox';
   checkbox.name = 'checkbox';
   removeIcon.addEventListener('click', (e) => {
-    removeTask(id);
+    removeTask(task.index);
     e.target.parentNode.remove();
   });
   if (task.completed === true) {
@@ -39,10 +39,10 @@ const createTask = (task, id) => {
   listContainer.appendChild(checkbox);
   listContainer.appendChild(description);
   listContainer.appendChild(removeIcon);
-  listContainer.addEventListener('mousemove', (event) => {
+  listContainer.addEventListener('mousemove', () => {
     removeIcon.classList.remove('invisible');
   });
-  listContainer.addEventListener('mouseleave', (event) => {
+  listContainer.addEventListener('mouseleave', () => {
     setTimeout(() => {
       removeIcon.classList.add('invisible');
     }, 500);
@@ -50,8 +50,8 @@ const createTask = (task, id) => {
   description.innerText = task.description;
 };
 const iterateTasks = () => {
-  list.forEach((task, id) => {
-    createTask(task, id);
+  list.forEach((task) => {
+    createTask(task);
   });
 };
 
@@ -76,7 +76,6 @@ const renderList = () => {
 renderList();
 document.querySelector('.input-text').addEventListener('keyup', (event) => {
   if (event.keyCode === 13) {
-    console.log('clicked');
     if (localStorage.getItem('list') == null) {
       localStorage.setItem('list', JSON.stringify([]));
     }
