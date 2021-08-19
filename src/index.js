@@ -17,6 +17,7 @@ const createTask = (task, id) => {
   const checkbox = document.createElement('input');
   const removeIcon = document.createElement('i');
   removeIcon.className = 'fas fa-trash-alt';
+  removeIcon.classList.add('invisible');
   document.querySelector('.the-list').appendChild(listContainer);
   checkbox.type = 'checkbox';
   checkbox.name = 'checkbox';
@@ -38,6 +39,14 @@ const createTask = (task, id) => {
   listContainer.appendChild(checkbox);
   listContainer.appendChild(description);
   listContainer.appendChild(removeIcon);
+  listContainer.addEventListener('mousemove', (event) => {
+    removeIcon.classList.remove('invisible');
+  });
+  listContainer.addEventListener('mouseleave', (event) => {
+    setTimeout(() => {
+      removeIcon.classList.add('invisible');
+    }, 500);
+  });
   description.innerText = task.description;
 };
 const iterateTasks = () => {
