@@ -11,6 +11,7 @@ const addTask = (description, completed, index) => {
   const oldList = JSON.parse(localStorage.getItem('list'));
   oldList.push(task);
   localStorage.setItem('list', JSON.stringify(oldList));
+  return task;
 };
 
 const removeTask = (id) => {
