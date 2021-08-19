@@ -4,7 +4,7 @@
 
 > A simple App that allows a user to make a to-do-list.
 
-![screenshot](./screenshots/screenshot.JPG)
+![screenshot](./screenshot.JPG)
 ## Built With
 
 - Javascript, HTML and CSS
