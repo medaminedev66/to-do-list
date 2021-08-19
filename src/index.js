@@ -1,5 +1,6 @@
 import './style.css';
 import update from './completed.js';
+import { addTask, removeTask } from './tasks.js';
 
 let list = [];
 if (localStorage.getItem('list') == null) {
@@ -34,14 +35,16 @@ const iterateTasks = () => {
 };
 
 const arrangeList = () => {
-  let max = list[0].index;
-  for (let i = 1; i < list.length; i += 1) {
-    if (list[i].index > max) {
-      max = list[i].index;
-    } else {
-      const temp = list[i];
-      list[i] = list[i - 1];
-      list[i - 1] = temp;
+  if (list.length >= 2) {
+    let max = list[0].index;
+    for (let i = 1; i < list.length; i += 1) {
+      if (list[i].index > max) {
+        max = list[i].index;
+      } else {
+        const temp = list[i];
+        list[i] = list[i - 1];
+        list[i - 1] = temp;
+      }
     }
   }
 };
@@ -50,3 +53,16 @@ const renderList = () => {
   iterateTasks();
 };
 renderList();
+document.querySelector('.input-text').addEventListener('keyup', (event) => {
+  if (event.keyCode === 13) {
+    console.log('clicked');
+    if (localStorage.getItem('list') == null) {
+      localStorage.setItem('list', JSON.stringify([]));
+    }
+    const inputText = document.querySelector('.input-text').value;
+    let index;
+    if (list.length > 0) index = list[list.length - 1].index + 1;
+    else index = 1;
+    addTask(inputText, false, index);
+  }
+});
