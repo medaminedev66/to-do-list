@@ -11,7 +11,7 @@
 
 ## Live Demo
 
-[Live Demo Link](https://medaminedev66.github.io/)
+[Live Demo Link](https://medaminedev66.github.io/to-do-list/)
 ## Getting Started
 
 - In terminal or Command line. Navigate to a directory in your local storage where you'd like to store the project and paste ```https://github.com/medaminedev66/to-do-list.git```
