@@ -1,30 +1,9 @@
 import './style.css';
 import update from './completed.js';
 
-let list = [
-  {
-    description: 'Complete the to do list project',
-    completed: false,
-    index: 2,
-  },
-  {
-    description: 'Learn how to set up webpack',
-    completed: true,
-    index: 1,
-  },
-  {
-    description: 'Go to bed',
-    completed: false,
-    index: 4,
-  },
-  {
-    description: 'check with Ali his process during this week',
-    completed: true,
-    index: 3,
-  },
-];
+let list = [];
 if (localStorage.getItem('list') == null) {
-  localStorage.setItem('list', JSON.stringify(list));
+  localStorage.setItem('list', JSON.stringify([]));
 }
 if (localStorage.getItem('list') != null) {
   list = JSON.parse(localStorage.getItem('list'));
