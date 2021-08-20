@@ -27,29 +27,21 @@ const removeTask = (index) => {
   localStorage.setItem('list', JSON.stringify(newList));
 };
 
-const editTask = (span, task) => {
+const editTask = (task) => {
   const oldList = JSON.parse(localStorage.getItem('list'));
-  span.addEventListener('click', () => {
-    span.setAttribute('contenteditable', 'true');
-    span.addEventListener('keyup', () => {
-      task.description = span.innerText;
-      oldList.forEach((element) => {
-        if (element.index === task.index) {
-          element.description = task.description;
-        }
-      });
-      localStorage.setItem('list', JSON.stringify(oldList));
-    });
+  oldList.forEach((element) => {
+    if (element.index === task.index) {
+      element.description = task.description;
+    }
   });
+  localStorage.setItem('list', JSON.stringify(oldList));
 };
 
 const cleanCompleted = () => {
-  console.log('Laaa');
   const oldList = JSON.parse(localStorage.getItem('list'));
   oldList.forEach((element) => {
     if (element.completed) {
       element.index = 0;
-      console.log(element.parentNode);
     }
   });
   const newList = oldList.filter((ind) => ind.index !== 0);
@@ -60,19 +52,16 @@ const cleanCompleted = () => {
       i += 1;
     });
   }
-  let k = 0;
   localStorage.setItem('list', JSON.stringify(newList));
   const allCheckboxes = Array.from(
     document.querySelectorAll('input[type="checkbox"]'),
   );
-  console.log(allCheckboxes.length);
   allCheckboxes.forEach((checkbox) => {
     if (checkbox.checked) {
-      console.log(k);
-      k += 1;
       checkbox.parentNode.remove();
     }
   });
 };
 
-export { addTask, removeTask, editTask, cleanCompleted };
+export { addTask, removeTask, editTask };
+export { cleanCompleted };

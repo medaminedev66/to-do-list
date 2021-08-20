@@ -1,7 +1,10 @@
 import './style.css';
 import update from './completed.js';
-import { addTask, removeTask, editTask, cleanCompleted } from './tasks.js';
+import * as func from './tasks.js';
 
+if (localStorage.getItem('list') == null) {
+  localStorage.setItem('list', JSON.stringify([]));
+}
 const createTask = (task) => {
   const listContainer = document.createElement('div');
   listContainer.className = 'listContainer';
@@ -15,7 +18,7 @@ const createTask = (task) => {
   checkbox.type = 'checkbox';
   checkbox.name = 'checkbox';
   removeIcon.addEventListener('click', (e) => {
-    removeTask(task.index);
+    func.removeTask(task.index);
     e.target.parentNode.remove();
   });
   if (task.completed === true) {
@@ -40,12 +43,15 @@ const createTask = (task) => {
     }, 100);
   });
   description.innerText = task.description;
-  editTask(description, task);
+  description.addEventListener('click', () => {
+    description.setAttribute('contenteditable', 'true');
+    description.addEventListener('keyup', () => {
+      task.description = description.innerText;
+      func.editTask(task);
+    });
+  });
 };
 const iterateTasks = () => {
-  if (localStorage.getItem('list') == null) {
-    localStorage.setItem('list', JSON.stringify([]));
-  }
   if (localStorage.getItem('list') != null) {
     const list = JSON.parse(localStorage.getItem('list'));
     list.forEach((task) => {
@@ -54,22 +60,24 @@ const iterateTasks = () => {
   }
 };
 
-// const arrangeList = () => {
-//   if (list.length >= 2) {
-//     let max = list[0].index;
-//     for (let i = 1; i < list.length; i += 1) {
-//       if (list[i].index > max) {
-//         max = list[i].index;
-//       } else {
-//         const temp = list[i];
-//         list[i] = list[i - 1];
-//         list[i - 1] = temp;
-//       }
-//     }
-//   }
-// };
+const arrangeList = () => {
+  const list = JSON.parse(localStorage.getItem('list'));
+  if (list.length >= 2) {
+    let max = list[0].index;
+    for (let i = 1; i < list.length; i += 1) {
+      if (list[i].index > max) {
+        max = list[i].index;
+      } else {
+        const temp = list[i];
+        list[i] = list[i - 1];
+        list[i - 1] = temp;
+      }
+    }
+  }
+  localStorage.setItem('list', JSON.stringify(list));
+};
 const renderList = () => {
-  // arrangeList();
+  arrangeList();
   iterateTasks();
 };
 renderList();
@@ -79,7 +87,7 @@ const renderTask = () => {
   let index;
   if (list.length > 0) index = list[list.length - 1].index + 1;
   else index = 1;
-  const tasky = addTask(inputText, false, index);
+  const tasky = func.addTask(inputText, false, index);
   createTask(tasky);
   document.querySelector('.input-text').value = '';
 };
@@ -91,6 +99,7 @@ document.querySelector('.fa-plus-square').addEventListener('click', (event) => {
     return false;
   }
   renderTask();
+  return true;
 });
 document.querySelector('.input-text').addEventListener('keyup', (event) => {
   if (event.keyCode === 13) {
@@ -101,7 +110,8 @@ document.querySelector('.input-text').addEventListener('keyup', (event) => {
     }
     renderTask();
   }
+  return true;
 });
 document.querySelector('.clean-completed').addEventListener('click', () => {
-  cleanCompleted();
+  func.cleanCompleted();
 });
