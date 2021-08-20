@@ -6,6 +6,8 @@
 }
 
 .to-do-list {
+  display: flex;
+  flex-direction: column;
   border: 1px solid slategray;
   box-shadow: 0 0 2px;
   max-width: 500px;
@@ -17,6 +19,21 @@ h2 {
   margin: 0.5rem;
   font-size: large;
   color: rgb(70, 70, 70);
+}
+
+.clean-completed {
+  margin: 0.5rem auto 0.5rem auto;
+  border: none;
+  background-color: rgb(211, 211, 211);
+  width: 10rem;
+  height: 2rem;
+  color: rgb(31, 31, 31);
+}
+
+.clean-completed:hover {
+  transform: scale(1.08);
+  background-color: rgb(164, 172, 180);
+  color: rgb(59, 59, 59);
 }
 
 .listContainer {

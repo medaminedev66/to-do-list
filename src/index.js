@@ -84,11 +84,21 @@ const renderTask = () => {
   document.querySelector('.input-text').value = '';
 };
 
-document.querySelector('.fa-plus-square').addEventListener('click', () => {
+document.querySelector('.fa-plus-square').addEventListener('click', (event) => {
+  const value = document.querySelector('.input-text').value.trim();
+  if (!value) {
+    event.stopImmediatePropagation();
+    return false;
+  }
   renderTask();
 });
 document.querySelector('.input-text').addEventListener('keyup', (event) => {
   if (event.keyCode === 13) {
+    const value = document.querySelector('.input-text').value.trim();
+    if (!value) {
+      event.stopImmediatePropagation();
+      return false;
+    }
     renderTask();
   }
 });
