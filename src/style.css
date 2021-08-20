@@ -31,10 +31,6 @@ h2 {
   color: rgb(31, 31, 31);
 }
 
-.listContainer p {
-  padding-left: 0.5rem;
-}
-
 .input-text {
   font-size: medium;
   padding-left: 0.5rem;
@@ -81,4 +77,14 @@ i {
   justify-content: space-between;
   align-items: center;
   padding: 0 0.5rem 0 0.5rem;
+}
+
+.description {
+  margin-left: 0.5rem;
+}
+
+.description:focus {
+  font-style: italic;
+  background-color: burlywood;
+  outline: none;
 }

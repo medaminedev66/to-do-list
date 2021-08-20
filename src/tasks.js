@@ -27,4 +27,15 @@ const removeTask = (index) => {
   localStorage.setItem('list', JSON.stringify(newList));
 };
 
-export { addTask, removeTask };
+const editTask = (span, task, list) => {
+  span.addEventListener('click', () => {
+    span.setAttribute('contenteditable', 'true');
+    span.addEventListener('keyup', () => {
+      console.log(span.innerText);
+      task.description = span.innerText;
+      localStorage.setItem('list', JSON.stringify(list));
+    });
+  });
+};
+
+export { addTask, removeTask, editTask };

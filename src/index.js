@@ -1,6 +1,6 @@
 import './style.css';
 import update from './completed.js';
-import { addTask, removeTask } from './tasks.js';
+import { addTask, removeTask, editTask } from './tasks.js';
 
 let list = [];
 if (localStorage.getItem('list') == null) {
@@ -13,7 +13,8 @@ if (localStorage.getItem('list') != null) {
 const createTask = (task) => {
   const listContainer = document.createElement('div');
   listContainer.className = 'listContainer';
-  const description = document.createElement('p');
+  const description = document.createElement('span');
+  description.className = 'description';
   const checkbox = document.createElement('input');
   const removeIcon = document.createElement('i');
   removeIcon.className = 'fas fa-trash-alt';
@@ -48,6 +49,7 @@ const createTask = (task) => {
     }, 100);
   });
   description.innerText = task.description;
+  editTask(description, task, list);
 };
 const iterateTasks = () => {
   list.forEach((task) => {

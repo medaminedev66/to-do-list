@@ -6,7 +6,7 @@ module.exports = {
   devServer: {
     contentBase: './dist',
   },
-  mode: 'production',
+  mode: 'development',
   devtool: 'inline-source-map',
   plugins: [
     new HtmlWebpackPlugin({
