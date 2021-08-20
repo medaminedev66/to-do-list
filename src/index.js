@@ -40,7 +40,7 @@ const createTask = (task) => {
     }, 100);
   });
   description.innerText = task.description;
-  // editTask(description, task, list);
+  editTask(description, task);
 };
 const iterateTasks = () => {
   if (localStorage.getItem('list') == null) {

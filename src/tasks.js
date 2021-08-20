@@ -27,13 +27,18 @@ const removeTask = (index) => {
   localStorage.setItem('list', JSON.stringify(newList));
 };
 
-const editTask = (span, task, list) => {
+const editTask = (span, task) => {
+  const oldList = JSON.parse(localStorage.getItem('list'));
   span.addEventListener('click', () => {
     span.setAttribute('contenteditable', 'true');
     span.addEventListener('keyup', () => {
-      console.log(span.innerText);
       task.description = span.innerText;
-      localStorage.setItem('list', JSON.stringify(list));
+      oldList.forEach((element) => {
+        if (element.index === task.index) {
+          element.description = task.description;
+        }
+      });
+      localStorage.setItem('list', JSON.stringify(oldList));
     });
   });
 };
