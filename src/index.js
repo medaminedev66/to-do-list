@@ -1,6 +1,6 @@
 import './style.css';
 import update from './completed.js';
-import { addTask, removeTask, editTask } from './tasks.js';
+import { addTask, removeTask, editTask, cleanCompleted } from './tasks.js';
 
 const createTask = (task) => {
   const listContainer = document.createElement('div');
@@ -91,4 +91,7 @@ document.querySelector('.input-text').addEventListener('keyup', (event) => {
   if (event.keyCode === 13) {
     renderTask();
   }
+});
+document.querySelector('.clean-completed').addEventListener('click', () => {
+  cleanCompleted();
 });
