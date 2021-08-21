@@ -1,8 +1,8 @@
 # to-do-list
 
-#To-do-list Project
+#To-do list Project
 
-> A simple App that allows a user to make a to-do-list.
+> A simple App that allows a user to make a to-do list.
 
 ![screenshot](./screenshot.JPG)
 ## Built With
