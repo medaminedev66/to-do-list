@@ -11,11 +11,12 @@
 
 ## Live Demo
 
-[Live Demo Link](https://medaminedev66.github.io/to-do-list/)
+[Live Demo Link](https://medaminedev66.github.io/to-do-list/dist/)
 ## Getting Started
 
 - In terminal or Command line. Navigate to a directory in your local storage where you'd like to store the project and paste ```https://github.com/medaminedev66/to-do-list.git```
-- Navigate to the ```index.html``` file and open it in your favourite browser.
+- Open your terminal and run `npm install` to install the node packages.
+- Run `npm run start` to run the project.
 
 ## Author
 
